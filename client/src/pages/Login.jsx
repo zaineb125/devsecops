@@ -2,6 +2,7 @@ import { Link, Navigate } from "react-router-dom"
 import LoginImg from "../assets/login.jpg"
 import { useContext, useState } from "react"
 import { UserContext } from "../context/UserContext";
+import Cookies from 'js-cookie';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -18,7 +19,10 @@ const Login = () => {
       credentials: 'include', 
     })
     if(result.ok){
-      result.json().then(userInfo => { 
+    
+      result.json().then((data) => {
+        const {token,userInfo}=data;
+        Cookies.set('token', token, { expires: 7, path: '/' });
         setUserInfo(userInfo); 
         setRedirect(true); 
       })

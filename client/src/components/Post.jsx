@@ -8,7 +8,7 @@ const Post = ({_id,title,summary,cover,createdAt,author,comments,likes}) => {
       <div>
         <Link to={`/post/${_id}`}>
           <img 
-            src={'https://mern-blog-backend-nu.vercel.app/'+cover} 
+            src={'http://localhost:5000/'+cover} 
             alt="" 
             className="rounded w-full h-[200px] object-cover"
           />

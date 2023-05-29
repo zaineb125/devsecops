@@ -4,6 +4,7 @@ import { formatISO9075 } from "date-fns";
 import { UserContext } from "../context/UserContext";
 import { AiOutlineHeart, AiOutlineSend , AiFillHeart, AiOutlineArrowLeft} from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 const PostDetail = () => {
   const [postInfo, setPostInfo] = useState(null);
@@ -13,9 +14,10 @@ const PostDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [likes, setLikes] = useState(0);
+  const token =Cookies.get('token');
 
   useEffect(() => {
-    fetch(`http://localhost:5000/post/${id}`)
+    fetch(`http://localhost:5000/post/${id}`,{ headers:{'authorization': token}})
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -31,7 +33,7 @@ const PostDetail = () => {
         console.error("Error retrieving post:", error);
       });
 
-    fetch(`http://localhost:5000/post/${id}/comments`)
+    fetch(`http://localhost:5000/post/${id}/comments`,{ headers:{'authorization': token}})
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -51,6 +53,7 @@ const PostDetail = () => {
 
   const handleDelete = () => {
     fetch(`http://localhost:5000/post/${id}`, {
+      headers:{'authorization': token},
       method: "DELETE",
       credentials: "include",
     })
@@ -72,6 +75,7 @@ const PostDetail = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'authorization': token
       },
       credentials: "include",
       body: JSON.stringify({ content: commentContent }),
@@ -82,7 +86,7 @@ const PostDetail = () => {
         setCommentContent(""); 
 
       
-        fetch(`http://localhost:5000/post/${id}/comments`)
+        fetch(`http://localhost:5000/post/${id}/comments`,{ headers:{'authorization': token}})
           .then((res) => {
             if (res.ok) {
               return res.json();
@@ -106,6 +110,7 @@ const PostDetail = () => {
 
   const handleLike = () => {
     fetch(`http://localhost:5000/post/${id}/like`, {
+      headers:{'authorization': token},
       method: "POST",
       credentials: "include",
     })
@@ -143,7 +148,7 @@ const PostDetail = () => {
     <div className="w-full md:flex mt-8 gap-5 mb-10">
       <div className="md:w-3/4">
         <img
-          src={`https://mern-blog-backend-nu.vercel.app/${postInfo.cover}`}
+          src={`http://localhost:5000/${postInfo.cover}`}
           alt=""
           className="w-full h-[300px] object-cover mb-3"
         />

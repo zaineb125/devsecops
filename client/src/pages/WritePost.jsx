@@ -3,6 +3,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"
 import {Navigate} from "react-router-dom"
 import Editor from "../components/Editor"
+import Cookies from 'js-cookie';
 
 
 const WritePost = () => {
@@ -11,6 +12,8 @@ const WritePost = () => {
   const [content, setContent] = useState('');
   const [files,setFiles] = useState('');
   const [redirect, setRedirect] = useState(false)
+  const token =Cookies.get('token');
+
 
   async function writePost(e){
     const data = new FormData();
@@ -21,6 +24,7 @@ const WritePost = () => {
 
     e.preventDefault()
     const result = await fetch('http://localhost:5000/post',{
+      headers:{'authorization': token},
       method:'POST',
       body: data,
       credentials: 'include',

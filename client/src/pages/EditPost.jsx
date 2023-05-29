@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {Navigate, useParams} from "react-router-dom";
 import Editor from "../components/Editor";
+import Cookies from 'js-cookie';
 
 export default function EditPost() {
   const {id} = useParams();
@@ -9,9 +10,10 @@ export default function EditPost() {
   const [content,setContent] = useState('');
   const [files, setFiles] = useState('');
   const [redirect,setRedirect] = useState(false);
-
+  const token =Cookies.get('token');
   useEffect(() => {
-    fetch('http://localhost:5000/post/'+id)
+    
+     fetch('http://localhost:5000/post/'+id, {headers:{'authorization': token}})
       .then(result => {
         result.json().then(postInfo => {
           setTitle(postInfo.title);
@@ -32,6 +34,7 @@ export default function EditPost() {
       data.set('file', files?.[0]);
     }
     const result = await fetch('http://localhost:5000/post', {
+      headers:{'authorization': token},
       method: 'PUT',
       body: data,
       credentials: 'include',

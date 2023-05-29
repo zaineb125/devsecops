@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import Post from "../components/Post";
+import Cookies from 'js-cookie';
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
+  const token =Cookies.get('token');
 
   useEffect(() => {
-    fetch('http://localhost:5000/post')
+    fetch('http://localhost:5000/post',{ headers:{'authorization': token}})
       .then(res => res.json())
       .then(posts => {
         setPosts(posts);

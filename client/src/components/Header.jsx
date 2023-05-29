@@ -2,13 +2,16 @@ import { useContext, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { BsPencilSquare } from "react-icons/bs"
 import { UserContext } from "../context/UserContext"
+import Cookies from 'js-cookie';
 
 const Header = () => {
-  const { setUserInfo, userInfo } = useContext(UserContext)
-
+  const { setUserInfo, userInfo } = useContext(UserContext);
+  const token =Cookies.get('token');
+  console.log(token);
   useEffect(() => {
-    fetch('https://mern-blog-backend-nu.vercel.app/profile', {
+    fetch('http://localhost:5000/profile', {
       credentials: 'include',
+      headers:{'authorization': token}
     }).then(res => {
       res.json().then(userInfo => {
         setUserInfo(userInfo);
@@ -18,7 +21,7 @@ const Header = () => {
 
 
   function logout() {
-    fetch('https://mern-blog-backend-nu.vercel.app/logout', {
+    fetch('http://localhost:5000/logout', {
       credentials: 'include',
       method: 'POST',
     });
@@ -27,6 +30,7 @@ const Header = () => {
 
 
   const email = userInfo?.email;
+  console.log(userInfo);
 
   return (
     <header className="py-4 flex items-center justify-between">

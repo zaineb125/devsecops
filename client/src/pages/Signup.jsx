@@ -1,18 +1,20 @@
 import { Link } from "react-router-dom"
 import SignupImg from "../assets/signup.jpg"
 import { useState } from "react"
+import Cookies from 'js-cookie';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const token =Cookies.get('token');
 
   async function signup(e){
     e.preventDefault();
     const result = await fetch('http://localhost:5000/signup',{
       method: 'POST',
       body: JSON.stringify({username,email,password}),
-      headers: {'Content-Type' : 'application/json'},
+      headers: {'Content-Type' : 'application/json','authorization': token},
     });
     if(result.status === 200){
       alert('Sign up successfull')
