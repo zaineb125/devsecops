@@ -30,7 +30,7 @@ const limiter = RateLimit({
 const salt = bcrypt.genSaltSync(10);
 const secret = process.env.SECRET;
 
-app.use(cors({ credentials: true, origin: "http://127.0.0.1:5173" }));
+app.use(cors({ credentials: true, origin: "https://127.0.0.1" }));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
@@ -304,3 +304,6 @@ app.post("/post/:id/like", async (req, res) => {
 });
 
 app.listen(PORT, () => console.log("Server Started"));
+
+
+module.exports = app ;
