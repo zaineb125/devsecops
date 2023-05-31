@@ -23,8 +23,8 @@ const app = express();
 require("dotenv").config();
 
 const limiter = RateLimit({
-  windowMs: 1 * 60 * 1000, // 1 minute
-  max: 5,
+  windowMs: 1 * 60 * 100000, // 100 minute
+  max: 50,
 });
 
 const salt = bcrypt.genSaltSync(10);
