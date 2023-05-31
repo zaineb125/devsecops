@@ -32,9 +32,9 @@ jobs:
         working-directory: api
         run: npm install
 
-      - name: Build the server
-        working-directory: api
-        run: npm start
+   #   - name: Build the server
+    #    working-directory: api
+      #  run: npm start
 
       - name: Run server tests
         working-directory: api
