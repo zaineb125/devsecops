@@ -14,9 +14,9 @@ const app = express();
 require("dotenv").config();
 
 const salt = bcrypt.genSaltSync(10);
-const secret = "afe24t24g9bub";
+const secret = process.env.SECRET;
 
-app.use(cors({ credentials: true, origin: "http://127.0.0.1:5174" }));
+app.use(cors({ credentials: true, origin: "http://127.0.0.1:5173" }));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
@@ -34,10 +34,13 @@ mongoose
 app.post("/signup", async (req, res) => {
   const { username, email, password } = req.body;
   try {
+    const usernameString = username.toString();
+    const emailString = email.toString();
+    const passwordString = password.toString();
     const userDoc = await User.create({
-      username,
-      email,
-      password: bcrypt.hashSync(password, salt),
+      username: usernameString,
+      email: emailString,
+      password: bcrypt.hashSync(passwordString, salt),
     });
     res.json(userDoc);
   } catch (e) {
@@ -49,7 +52,8 @@ app.post("/signup", async (req, res) => {
 //Login API
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  const userDoc = await User.findOne({ email });
+  const emailString = email.toString();
+  const userDoc = await User.findOne({ email: emailString });
   if (!userDoc) {
     return res.status(400).json("User not found");
   }
@@ -75,9 +79,7 @@ app.post("/login", async (req, res) => {
 
 // profile
 app.get("/profile", (req, res) => {
-  console.log(req.headers);
   const token = req.headers.authorization;
-  console.log(token);
   if (!token) {
     return res.status(401).json({ error: "Token not provided" });
   }
@@ -262,14 +264,11 @@ app.post("/post/:id/like", async (req, res) => {
         return res.status(404).json({ error: "Post not found" });
       }
 
-      
       const userLiked = postDoc.likes.some((userId) => userId.equals(info.id));
 
       if (userLiked) {
-        
         postDoc.likes.pull(info.id);
       } else {
-        
         postDoc.likes.push(info.id);
       }
 

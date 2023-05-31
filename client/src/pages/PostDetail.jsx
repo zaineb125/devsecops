@@ -58,8 +58,7 @@ const PostDetail = () => {
       credentials: "include",
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data.message); 
+      .then(() => {
         setPostInfo(null); 
         navigate("/"); 
       })
@@ -81,8 +80,7 @@ const PostDetail = () => {
       body: JSON.stringify({ content: commentContent }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log("Comment created:", data);
+      .then(() => {
         setCommentContent(""); 
 
       

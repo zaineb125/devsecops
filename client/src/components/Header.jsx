@@ -7,7 +7,6 @@ import Cookies from 'js-cookie';
 const Header = () => {
   const { setUserInfo, userInfo } = useContext(UserContext);
   const token =Cookies.get('token');
-  console.log(token);
   useEffect(() => {
     fetch('http://localhost:5000/profile', {
       credentials: 'include',
@@ -25,12 +24,12 @@ const Header = () => {
       credentials: 'include',
       method: 'POST',
     });
+    Cookies.remove('token');
     setUserInfo(null);
   }
 
 
   const email = userInfo?.email;
-  console.log(userInfo);
 
   return (
     <header className="py-4 flex items-center justify-between">
