@@ -119,10 +119,11 @@ app.post("/post", upload.single("file"), async (req, res) => {
   }
 
   const { originalname, path } = req.file;
+  const pathSanitized = sanitizeInput(path);
   const parts = originalname.split(".");
   const ext = parts[parts.length - 1];
-  const newPath = path + "." + ext;
-  fs.renameSync(path, newPath);
+  const newPath = pathSanitized + "." + ext;
+  fs.renameSync(pathSanitized, newPath);
 
   const token = req.headers.authorization;
   jwt.verify(token, secret, {}, async (err, info) => {
@@ -147,8 +148,8 @@ app.put("/post", upload.single("file"), async (req, res) => {
     const pathSanitized = sanitizeInput(path);
     const parts = originalname.split(".");
     const ext = parts[parts.length - 1];
-    newPath = path + "." + ext;
-    fs.renameSync(path, newPath);
+    newPath = pathSanitized + "." + ext;
+    fs.renameSync(pathSanitized, newPath);
   }
 
   const token = req.headers.authorization;
