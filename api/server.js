@@ -42,8 +42,8 @@ mongoose
   .then(() => {
     console.log("Connecting with DataBase");
   })
-  .catch(() => {
-    console.log("error");
+  .catch((err) => {
+    console.log("error " + err);
   });
 
 //Signup API
