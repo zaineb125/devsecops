@@ -62,6 +62,11 @@ jobs:
       - name: Build Docker images
         run: docker-compose build
 
+      - name: Tag Docker images
+        run: |
+          docker tag mern-ui malekghorbel/mern-ui:latest
+          docker tag mern-api malekghorbel/mern-api:latest
+
       - name: Push Docker images
         run: |
           docker push malekghorbel/mern-ui:latest
