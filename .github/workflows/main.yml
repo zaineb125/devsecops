@@ -33,10 +33,6 @@ jobs:
         working-directory: api
         run: npm install
 
-      - name: Build the server
-        working-directory: api
-        run: npm start
-
       - name: Run server tests
         working-directory: api
         run: npm test
@@ -53,6 +49,11 @@ jobs:
         working-directory: client
         run: npm test
 
+  docker-build-push:
+    runs-on: ubuntu-latest
+    env:
+      MONGO_URL: ${{ secrets.MONGO_URL }}
+    steps:
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
@@ -72,6 +73,9 @@ jobs:
           docker push malekghorbel/mern-ui:latest
           docker push malekghorbel/mern-api:latest
 
+  sonarqube:
+    runs-on: ubuntu-latest
+    steps:
       - name: sonar
         uses: actions/checkout@v2
         with:
