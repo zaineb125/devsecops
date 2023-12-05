@@ -64,5 +64,5 @@ jobs:
 
       - name: Push Docker images
         run: |
-          docker push user/mern-ui:latest
-          docker push user/mern-api:latest
+          docker push malekghorbel/mern-ui:latest
+          docker push malekghorbel/mern-api:latest
