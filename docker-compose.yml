@@ -5,6 +5,7 @@ services:
    build:
       context: ./client
       dockerfile: dockerfile
+   image: mern-ui
    ports:
     -  5173:5173
    container_name: mern-ui
@@ -19,6 +20,7 @@ services:
    build:
       context: ./api
       dockerfile: dockerfile
+   image: mern-api
    ports:
      - 5000:5000
    container_name: mern-api
