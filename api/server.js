@@ -30,7 +30,7 @@ const limiter = RateLimit({
 const salt = bcrypt.genSaltSync(10);
 const secret = process.env.SECRET;
 
-app.use(cors({ credentials: true, origin: "https://127.0.0.1" }));
+app.use(cors({ credentials: true, origin: "http://mern-ui.westeurope.azurecontainer.io" }));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
