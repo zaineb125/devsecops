@@ -7,7 +7,7 @@ services:
       dockerfile: dockerfile
    image: mern-ui
    ports:
-    -  5173:5173
+    -  80:80
    container_name: mern-ui
    volumes:
     -  ./client/src:/usr/app/src
