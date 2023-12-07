@@ -12,7 +12,7 @@ const Login = () => {
 
   async function login(e){
     e.preventDefault();
-    const result = await fetch('http://localhost:5000/login',{
+    const result = await fetch('http://mern-api.westeurope.azurecontainer.io/login',{
       method:'POST',
       body:JSON.stringify({email,password}), 
       headers:{'Content-Type':'application/json'}, 

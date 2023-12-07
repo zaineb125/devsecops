@@ -23,7 +23,7 @@ const WritePost = () => {
     data.set('file',files[0]);
 
     e.preventDefault()
-    const result = await fetch('http://localhost:5000/post',{
+    const result = await fetch('http://mern-api.westeurope.azurecontainer.io/post',{
       headers:{'authorization': token},
       method:'POST',
       body: data,

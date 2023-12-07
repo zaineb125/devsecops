@@ -19,7 +19,7 @@ resource "azurerm_container_group" "back_end" {
     }
   }
   ip_address_type = "Public"
-  dns_name_label  = "mern-api-${azurerm_resource_group.example.location}"
+  dns_name_label  = "mern-api"
 }
 
 resource "azurerm_container_group" "front_end" {
@@ -38,5 +38,5 @@ resource "azurerm_container_group" "front_end" {
     }
   }
   ip_address_type = "Public"
-  dns_name_label  = "mern-ui-${azurerm_resource_group.example.location}"
+  dns_name_label  = "mern-ui"
 }

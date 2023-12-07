@@ -8,7 +8,7 @@ const Header = () => {
   const { setUserInfo, userInfo } = useContext(UserContext);
   const token =Cookies.get('token');
   useEffect(() => {
-    fetch('http://localhost:5000/profile', {
+    fetch('http://mern-api.westeurope.azurecontainer.io/profile', {
       credentials: 'include',
       headers:{'authorization': token}
     }).then(res => {
@@ -20,7 +20,7 @@ const Header = () => {
 
 
   function logout() {
-    fetch('http://localhost:5000/logout', {
+    fetch('http://mern-api.westeurope.azurecontainer.io/logout', {
       credentials: 'include',
       method: 'POST',
     });

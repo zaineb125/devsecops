@@ -13,7 +13,7 @@ export default function EditPost() {
   const token =Cookies.get('token');
   useEffect(() => {
     
-     fetch('http://localhost:5000/post/'+id, {headers:{'authorization': token}})
+     fetch('http://mern-api.westeurope.azurecontainer.io/post/'+id, {headers:{'authorization': token}})
       .then(result => {
         result.json().then(postInfo => {
           setTitle(postInfo.title);
@@ -33,7 +33,7 @@ export default function EditPost() {
     if(files?.[0]){
       data.set('file', files?.[0]);
     }
-    const result = await fetch('http://localhost:5000/post', {
+    const result = await fetch('http://mern-api.westeurope.azurecontainer.io/post', {
       headers:{'authorization': token},
       method: 'PUT',
       body: data,

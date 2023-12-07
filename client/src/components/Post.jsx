@@ -8,7 +8,7 @@ const Post = ({_id,title,summary,cover,createdAt,author,comments,likes}) => {
       <div>
         <Link to={`/post/${_id}`}>
           <img 
-            src={'http://localhost:5000/'+cover} 
+            src={'http://mern-api.westeurope.azurecontainer.io/'+cover} 
             alt="" 
             className="rounded w-full h-[200px] object-cover"
           />

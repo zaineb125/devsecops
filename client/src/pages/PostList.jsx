@@ -7,7 +7,7 @@ const PostList = () => {
   const token =Cookies.get('token');
 
   useEffect(() => {
-    fetch('http://localhost:5000/post',{ headers:{'authorization': token}})
+    fetch('http://mern-api.westeurope.azurecontainer.io/post',{ headers:{'authorization': token}})
       .then(res => res.json())
       .then(posts => {
         setPosts(posts);

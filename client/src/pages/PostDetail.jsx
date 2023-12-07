@@ -17,7 +17,7 @@ const PostDetail = () => {
   const token =Cookies.get('token');
 
   useEffect(() => {
-    fetch(`http://localhost:5000/post/${id}`,{ headers:{'authorization': token}})
+    fetch(`http://mern-api.westeurope.azurecontainer.io/post/${id}`,{ headers:{'authorization': token}})
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -33,7 +33,7 @@ const PostDetail = () => {
         console.error("Error retrieving post:", error);
       });
 
-    fetch(`http://localhost:5000/post/${id}/comments`,{ headers:{'authorization': token}})
+    fetch(`http://mern-api.westeurope.azurecontainer.io/post/${id}/comments`,{ headers:{'authorization': token}})
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -52,7 +52,7 @@ const PostDetail = () => {
   }, [id]);
 
   const handleDelete = () => {
-    fetch(`http://localhost:5000/post/${id}`, {
+    fetch(`http://mern-api.westeurope.azurecontainer.io/post/${id}`, {
       headers:{'authorization': token},
       method: "DELETE",
       credentials: "include",
@@ -70,7 +70,7 @@ const PostDetail = () => {
   const handleCommentSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:5000/post/${id}/comments`, {
+    fetch(`http://mern-api.westeurope.azurecontainer.io/post/${id}/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -84,7 +84,7 @@ const PostDetail = () => {
         setCommentContent(""); 
 
       
-        fetch(`http://localhost:5000/post/${id}/comments`,{ headers:{'authorization': token}})
+        fetch(`http://mern-api.westeurope.azurecontainer.io/post/${id}/comments`,{ headers:{'authorization': token}})
           .then((res) => {
             if (res.ok) {
               return res.json();
@@ -107,7 +107,7 @@ const PostDetail = () => {
 
 
   const handleLike = () => {
-    fetch(`http://localhost:5000/post/${id}/like`, {
+    fetch(`http://mern-api.westeurope.azurecontainer.io/post/${id}/like`, {
       headers:{'authorization': token},
       method: "POST",
       credentials: "include",
@@ -146,7 +146,7 @@ const PostDetail = () => {
     <div className="w-full md:flex mt-8 gap-5 mb-10">
       <div className="md:w-3/4">
         <img
-          src={`http://localhost:5000/${postInfo.cover}`}
+          src={`http://mern-api.westeurope.azurecontainer.io/${postInfo.cover}`}
           alt=""
           className="w-full h-[300px] object-cover mb-3"
         />
